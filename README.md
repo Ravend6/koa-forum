@@ -1,4 +1,4 @@
-# Simple TODO app
+# Simple Forum app
 ## Features:
 - koa
 - mongoose
