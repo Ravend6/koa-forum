@@ -1,0 +1,27 @@
+{% extends "../layouts/main.html" %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-4 col-md-offset-4">
+      <h1 class="page-header">Регистрация</h1>
+      <form method="post" novalidate>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="form-group">
+          <label for="username">Никнейм</label>
+          <input type="text" class="form-control" id="username" placeholder="Никнейм" name="username">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Пароль</label>
+          <input type="password" class="form-control" id="password" placeholder="Пароль" name="password">
+        </div>
+        <button type="submit" class="btn btn-success">Зарегистрироватся</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

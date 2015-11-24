@@ -1,0 +1,41 @@
+{% extends "../layouts/main.html" %}
+
+{% block title %}Список форумов{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="page-header">Список форумов</h1>
+    <a href="{{ router.forums.url('new') }}">Создать новый форум</a>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Заглавие</th>
+          <th>Форум</th>
+          <th>Опубликовано</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for forum in forums %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td><a href="{{ router.forums.url('show', forum.slug, forum.slug) }}">{{ forum.title }}</a></td>
+            <td>{{ forum.forum.title }}</td>
+            <td>{{ forum.isVisible }}</td>
+            <td>
+              <a class="btn btn-danger btn-sm" href="{{ router.forums.url('edit', forum.id) }}">Редактировать</a>
+              <form class="action" action="{{ router.forums.url('delete', forum.id) }}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <button class="btn btn-primary btn-sm"
+                onclick="return confirm('Вы действительно хотите удалить?');">Удалить</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a class="btn btn-warning" href="{{ app.back }}">Назад</a>
+  </div>
+{% endblock %}

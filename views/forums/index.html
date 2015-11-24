@@ -1,0 +1,60 @@
+{% extends "../layouts/main.html" %}
+
+{% block title %}Форумы{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="page-header">Форумы</h1>
+    {% for forum in forums %}
+      <table class="table table-striped table-hover forumhead">
+        <thead>
+          <tr>
+            <th>
+              <a href="{{ router.forums.url('show', forum.slug) }}">{{ forum.title }}</a>
+              {% if forum.description %}
+                <small>- {{ forum.description | lower }}</small>
+              {% endif %}
+            </th>
+            <th>Темы / Сообщения</th>
+            <th>
+              Последние сообщение
+              <span class="pull-right">
+                <img class="forums-fade" src="/images/forums/fade/in.png"
+                alt="fade forums ico" data-id="{{ forum._id }}">
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody id="{{ forum._id }}">
+          {% for category in forum.categories %}
+            <tr>
+              <td>
+                <a href="{{ router.categories.url('show', forum.slug, category.slug) }}">{{ category.title }}</a>
+                <p>{{ category.description }}</p>
+                <p class="categories-list-moderators"><b>Модераторы:</b>
+                  {% for moderator in category.moderators %}
+                    <a href="#">{{ moderator.username }}</a>
+                  {% else %}
+                    еще не назначены
+                  {% endfor %}
+                </p>
+              </td>
+              <td>1000</td>
+              <td>2000</td>
+            </tr>
+          {% else %}
+            <tr>
+              <td>Категорий еще нет</td>
+              <td>Еще нет</td>
+              <td>Еще нет</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <article>
+        <h2>Форумов еще не создано</h2>
+      </article>
+    {% endfor %}
+  </div>
+{% endblock %}

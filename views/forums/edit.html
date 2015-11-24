@@ -1,0 +1,21 @@
+{% extends "../layouts/main.html" %}
+
+{% block title %}Редактировать {{ forum.title }}{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="col-sm-12">
+      <h1 class="page-header">Редактировать {{ forum.title }}</h1>
+      {% set buttonName = 'Сохранить' %}
+      {% set buttonClass = 'info' %}
+      {% set _method = 'put' %}
+      {% include "./_form.html" %}
+      <form class="action" action="{{ router.forums.url('delete', forum.id) }}" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+        <button class="btn btn-primary"
+        onclick="return confirm('Вы действительно хотите удалить?');">Удалить</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

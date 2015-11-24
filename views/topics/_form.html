@@ -1,0 +1,53 @@
+<form class="action" action="" method="post">
+  {% if _method %}
+    <input type="hidden" name="_method" value="{{ _method }}">
+  {% endif %}
+  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+  <div class="form-group">
+    <select class="form-control" name="category" required>
+      <option value="" disabled selected>Выберите категорию</option>
+      {% for category in topic.categories %}
+        <option value="{{ category.id }}" {% if category.selected %}selected{% endif %}>{{ category.title }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="title">Тема</label>
+    <input type="text" class="form-control" id="title" placeholder="Тема"
+    name="title" value="{{ topic.title }}" required>
+  </div>
+  {% if _method %}
+    <div class="form-group">
+      <label for="slug">Slug</label>
+      <input type="text" class="form-control" id="slug" placeholder="Slug"
+      name="slug" value="{{ topic.slug }}">
+      <span id="slug" class="help-block">Генерируется автоматически</span>
+    </div>
+  {% endif %}
+  <div class="form-group">
+    <label for="body">Текст</label>
+    <textarea class="form-control" rows="3" id="body" placeholder="Текст"
+    name="body">{{ topic.body }}</textarea>
+  </div>
+  <div class="form-group">
+    <label for="file">Файл</label>
+    <input type="file" name="file" id="file">
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="isVisible" {% if topic.isVisible %}checked{% endif %}> Опубликовано
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="isSticky" {% if topic.isSticky %}checked{% endif %}> Прикреплино
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="isClosed" {% if topic.isClosed %}checked{% endif %}> Закрыто
+    </label>
+  </div>
+  <button type="submit" class="btn btn-{{ buttonClass }}">{{ buttonName }}</button>
+  <a class="btn btn-warning" href="{{ app.back }}">Назад</a>
+</form>

@@ -1,0 +1,16 @@
+{% extends "./layouts/main.html" %}
+
+{% block title %}Admin{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Admin</h1>
+    <nav>
+      <ul>
+        <li><a href="{{ router.forums.url('list') }}">Форумы</a></li>
+        <li><a href="{{ router.categories.url('list') }}">Категории</a></li>
+        <li><a href="{{ router.topics.url('list') }}">Темы</a></li>
+      </ul>
+    </nav>
+  </div>
+{% endblock %}

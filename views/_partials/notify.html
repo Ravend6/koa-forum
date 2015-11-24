@@ -1,0 +1,5 @@
+{% if app.flash.message %}
+  <div id="flash-notify">
+    <p data-type="{{ app.flash.type }}">{{ app.flash.message }}</p>
+  </div>
+{% endif %}

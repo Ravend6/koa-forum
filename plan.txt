@@ -1,0 +1,100 @@
+#User
+displayName: String,
+token: String,
+avatar: String,
+caption: String,
+status: String,
+accountStatus: {
+  type: String,
+  enum: ['active', 'deleted', 'banned'],
+  default: 'active'
+},
+karma: Number,
+ip: String,
+email: String,
+local: {
+  email: {
+    type: String,
+    // required: "Поле `{PATH}` должно быть заполнено.",
+    // unique: "Этот `{PATH}` уже занят."
+  },
+  password: {
+    type: String,
+    // select: false
+    // required: "Поле `{PATH}` должно быть заполнено.",
+    // minlength: [6, "Минимальная длина пароля должна быть {MINLENGTH} символов."]
+  }
+},
+steam: {
+  id: String,
+  openId: String,
+},
+roles: {
+  type: [{
+    type: String,
+    enum: ['member', 'moderator', 'admin']
+}],
+  default: ['member'],
+  required: 'Пожалуйста, выбирите роль пользователя.',
+},
+createdAt: {
+  type: Date,
+  default: Date.now,
+},
+updatedAt: Date
+
+
+Forum
+-id ObjectId
+-title String
+-slug String
+-description String
+-position Number
+-isVisible Boolean
+-access [String] (user roles)
+
+Category
+-id ObjectId
+-forum ObjectId (forum id)
+-title String
+-slug String
+-description String
+-position Number
+-isVisible Boolean
+-backgroundColor String
+-access [String] (user roles)
+-moderators [ObjectId] (user id)
+
+Topic
+-id ObjectId
+-category ObjectId (category id)
+-author ObjectId (user id)
+-moderator ObjectId (user id) // последний кто модерировал пост
+-title String
+-body String
+-slug String
+-file String
+-isVisible Boolean
+-isSticky Boolean
+-isClosed Boolean
+-views Number
+-answer ObjectId (post id)
+-createdAt Date
+-updatedAt Date
+
+Post
+-id ObjectId
+-topic ObjectId (topic id)
+-author ObjectId (user id)
+-moderator ObjectId (user id) // последний кто модерировал пост
+-body String
+-file String
+-isVisible Boolean
+-createdAt Date
+-updatedAt Date
+
+Banned
+-id ObjectId
+-user ObjectId (user id)
+-timeStart Date
+-timeEnd Date

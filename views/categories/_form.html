@@ -1,0 +1,64 @@
+<form class="action" action="" method="post">
+  {% if _method %}
+    <input type="hidden" name="_method" value="{{ _method }}">
+  {% endif %}
+  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+  <div class="form-group">
+    <select class="form-control" name="forum" required>
+      <option value="" disabled selected>Выберите форум</option>
+      {% for forum in category.forums %}
+        <option value="{{ forum.id }}" {% if forum.selected %}selected{% endif %}>{{ forum.title }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="title">Заглавие</label>
+    <input type="text" class="form-control" id="title" placeholder="Заглавие"
+    name="title" value="{{ category.title }}" required>
+  </div>
+  {% if _method %}
+    <div class="form-group">
+      <label for="slug">Slug</label>
+      <input type="text" class="form-control" id="slug" placeholder="Slug"
+      name="slug" value="{{ category.slug }}">
+      <span id="slug" class="help-block">Генерируется автоматически</span>
+    </div>
+  {% endif %}
+  <div class="form-group">
+    <label for="description">Описание</label>
+    <textarea class="form-control" rows="3" id="description" placeholder="Описание"
+    name="description">{{ category.description }}</textarea>
+  </div>
+ <div class="form-group">
+    <label for="backgroundColor">Цвет</label>
+    <input type="color" class="form-control" id="backgroundColor" placeholder="Цвет"
+    name="backgroundColor" value="{{ category.backgroundColor }}">
+  </div>
+  <div class="form-group">
+    <label for="position">Позиция</label>
+    <input type="number" class="form-control" id="position" placeholder="Позиция"
+    name="position" value="{{ category.position }}">
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="isVisible" {% if category.isVisible %}checked{% endif %}> Опубликовано
+    </label>
+  </div>
+  <div class="form-group">
+    <select id="categories-access" name="access" multiple="multiple" class="form-control">
+      {% for access in category.access %}
+        <option value="{{ access.name }}" {% if access.selected %}selected{% endif %}>{{ access.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <select id="categories-moderators" name="moderators" multiple="multiple" class="form-control" {% if category.noneModerators %}disabled{% endif %}>
+      {% for moderator in category.moderators %}
+        <option value="{{ moderator.id }}" {% if moderator.selected %}selected{% endif %}>
+        {{ moderator.username }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit" class="btn btn-{{ buttonClass }}">{{ buttonName }}</button>
+  <a class="btn btn-warning" href="{{ app.back }}">Назад</a>
+</form>

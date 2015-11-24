@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="robots" content="all">
+  <title>{{ app.siteName }} | {% block title %}Home{% endblock %}</title>
+  <link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/bower/animate.css/animate.min.css">
+  <link rel="stylesheet" href="/bower/components-font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/bower/bootstrap-multiselect/dist/css/bootstrap-multiselect.css">
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/app.css">
+</head>
+<body>
+  {% include '../_partials/top-nav.html' %}
+  <div>
+    {% block content %}
+      <h1>Forum</h1>
+    {% endblock %}
+    {% include '../_partials/notify.html' %}
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <p class="pull-left">&copy; <a href="{{ router.index.url('index') }}">{{ app.siteName }}</a></p>
+      <!--<p class="pull-right"><a href="#" class="scrollup">Вверх</a></p>-->
+      <p class="pull-right">Powered by <a href="mailto:ravend6@gmail.com">Ravend</a></p>
+    </div>
+  </footer>
+  <script src="/bower/jquery/dist/jquery.min.js"></script>
+  <script src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bower/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+  <script src="/bower/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
+  <script src="/scripts/lib/jquery.name-badges.js"></script>
+  <script src="/bower/socket.io-client/socket.io.js"></script>
+  <script src="/scripts/lib/notify.js"></script>
+  <script src="/scripts/lib/pagination.js"></script>
+  <script src="/scripts/lib/nav.js"></script>
+  <script src="/scripts/components/users.js"></script>
+  <script src="/scripts/components/todos.js"></script>
+  <script src="/scripts/components/forums.js"></script>
+  <script src="/scripts/components/categories.js"></script>
+</body>
+</html>
